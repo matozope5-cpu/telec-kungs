@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Telecel Loans – instant lending</title>
-  <!-- font & icons (from OPay template) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Telecel Invest – grow your Telecel Cash</title>
+  <!-- font & icons (consistent with original premium style) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -15,7 +15,7 @@
     }
 
     :root {
-      --bg: #f5f5f5;                /* light grey like login page */
+      --bg: #f5f5f5;
       --card: #ffffff;
       --border: #e5e7eb;
       --text: #111827;
@@ -30,7 +30,7 @@
       font-family: 'Inter', Arial, Helvetica, sans-serif;
       background: var(--bg);
       color: var(--text);
-      padding: 20px 12px;
+      padding: 16px 12px;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -40,129 +40,143 @@
     .container {
       width: 100%;
       max-width: 420px;
-      background: #f7f7f7;          /* match login container background */
-      border-radius: 28px 28px 28px 28px;
-      padding: 24px 20px 30px;
+      background: #f7f7f7;
+      border-radius: 28px;
+      padding: 20px 16px 24px;
       box-shadow: var(--shadow);
       position: relative;
       overflow: hidden;
     }
 
-    /* top red shape from Telecel login */
+    /* iconic red top curve (Telecel signature) */
     .top-bg {
       position: absolute;
       top: 0;
       right: 0;
-      width: 220px;
-      height: 220px;
+      width: 200px;
+      height: 200px;
       background: linear-gradient(135deg, rgba(255, 0, 0, 0.25), rgba(255, 0, 0, 0.6));
-      border-bottom-left-radius: 120px;
+      border-bottom-left-radius: 100px;
       z-index: 0;
       pointer-events: none;
     }
 
-    /* header with telecel logo (circle + text) */
+    /* header with telecel circle + brand */
     .telecel-header {
       position: relative;
       z-index: 2;
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .logo-circle {
-      width: 56px;
-      height: 56px;
+      width: 48px;
+      height: 48px;
       background: var(--telecel-red);
       border-radius: 50%;
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 800;
-      margin: 0 auto 6px;
+      margin: 0 auto 4px;
       font-family: Arial, Helvetica, sans-serif;
       box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
     }
 
     .logo-text {
       color: var(--telecel-red);
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 800;
       letter-spacing: -0.5px;
       line-height: 1;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .tagline {
-      font-size: 14px;
+      font-size: 12px;
       color: var(--sub);
       font-weight: 500;
     }
 
-    /* loan title (like OPay "Loans") */
-    .loan-main-title {
-      font-size: 26px;
-      font-weight: 700;
-      margin-top: 4px;
-      color: #111;
+    /* investment headline (conversion focused) */
+    .investment-headline {
       position: relative;
       z-index: 2;
       text-align: center;
+      margin: 6px 0 4px;
+    }
+    .investment-headline h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.2;
+    }
+    .investment-headline p {
+      font-size: 12px;
+      color: var(--sub);
+      margin-top: 4px;
     }
 
-    /* main card – loan range card */
-    .loan-card {
+    /* main investment card (formerly loan card) */
+    .invest-card {
       background: var(--card);
       border-radius: var(--radius);
-      padding: 28px 20px;
+      padding: 20px 16px;
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
       text-align: center;
-      margin: 20px 0 24px;
+      margin: 16px 0 20px;
       position: relative;
       z-index: 2;
     }
 
-    .loan-label {
-      font-size: 13px;
+    .invest-label {
+      font-size: 12px;
       letter-spacing: 0.5px;
       color: var(--sub);
       text-transform: uppercase;
       font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
-    .loan-amount {
+    .return-rate {
       font-size: 36px;
       font-weight: 800;
       color: var(--telecel-red);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+    .return-rate span {
+      font-size: 16px;
+      font-weight: 600;
+      color: #555;
     }
 
-    .loan-sub {
-      font-size: 14px;
+    .invest-sub {
+      font-size: 13px;
       color: var(--sub);
-      line-height: 1.5;
-      margin-bottom: 24px;
-      max-width: 300px;
+      line-height: 1.4;
+      margin-bottom: 18px;
+      max-width: 280px;
       margin-left: auto;
       margin-right: auto;
     }
 
-    /* features grid (2x2) */
+    /* features grid (investment advantages) */
     .features {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 8px;
+      gap: 10px;
+      margin-bottom: 6px;
     }
 
     .feature {
       background: #fafafa;
-      border-radius: 14px;
-      padding: 16px 8px;
-      font-size: 13px;
+      border-radius: 12px;
+      padding: 12px 6px;
+      font-size: 12px;
       font-weight: 600;
       border: 1px solid var(--border);
       transition: 0.2s;
@@ -171,8 +185,8 @@
 
     .feature i {
       color: var(--telecel-red);
-      font-size: 22px;
-      margin-bottom: 8px;
+      font-size: 20px;
+      margin-bottom: 6px;
       display: block;
     }
 
@@ -181,21 +195,21 @@
       transform: translateY(-2px);
     }
 
-    /* CTA button (red) */
+    /* CTA button */
     .cta {
-      margin: 24px 0;
+      margin: 20px 0;
       position: relative;
       z-index: 2;
     }
 
     .btn {
       width: 100%;
-      padding: 16px 20px;
+      padding: 14px 20px;
       border: none;
       border-radius: 40px;
       background: var(--telecel-red);
       color: white;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       cursor: pointer;
       box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
@@ -208,25 +222,28 @@
       transform: scale(1.02);
     }
 
-    .btn-outline-light {
-      background: transparent;
-      border: 2px solid var(--telecel-red);
-      color: #333;
-      box-shadow: none;
-      margin-top: 12px;
+    .balance-note {
+      text-align: center;
+      font-size: 11px;
+      color: #2c6e2c;
+      background: #e8f5e9;
+      display: inline-block;
+      width: auto;
+      margin-top: 6px;
+      padding: 4px 12px;
+      border-radius: 30px;
       font-weight: 600;
     }
-
-    .btn-outline-light:hover {
-      background: #ffe5e5;
-      transform: none;
+    .balance-note i {
+      margin-right: 6px;
+      font-size: 10px;
     }
 
-    /* trust badges */
+    /* trust & security section */
     .trust {
       background: var(--card);
       border-radius: var(--radius);
-      padding: 22px 16px;
+      padding: 18px 14px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       position: relative;
@@ -235,25 +252,25 @@
 
     .trust-title {
       text-align: center;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
       color: #2c3e50;
     }
 
     .trust-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 10px;
     }
 
     .badge {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 10px 6px;
-      font-size: 12px;
+      gap: 6px;
+      padding: 8px 6px;
+      font-size: 11px;
       font-weight: 600;
       border: 1px solid var(--border);
       border-radius: 30px;
@@ -263,28 +280,27 @@
 
     .badge i {
       color: var(--telecel-red);
-      font-size: 14px;
+      font-size: 12px;
     }
 
-    /* footer / version */
     .footer {
       text-align: center;
-      margin-top: 24px;
-      font-size: 12px;
+      margin-top: 18px;
+      font-size: 10px;
       color: #aaa;
       position: relative;
       z-index: 2;
     }
 
-    /* spinner overlay (same behaviour) */
+    /* spinner overlay (identical behavior) */
     #spinner {
       position: fixed;
       inset: 0;
       display: none;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(2px);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(3px);
       z-index: 999;
     }
 
@@ -300,93 +316,126 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+
+    /* small extra highlight */
+    .highlight-invest {
+      background: #fff0f0;
+      border-radius: 14px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #b91c1c;
+      display: inline-block;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- spinner overlay (for cta simulation) -->
+  <!-- spinner overlay for conversion action -->
   <div id="spinner">
     <div class="loader"></div>
   </div>
 
   <div class="container">
-    <!-- red shape background (telecel signature) -->
+    <!-- signature red top curved background (unchanged elegance) -->
     <div class="top-bg"></div>
 
-    <!-- telecel header (circle + word) -->
+    <!-- telecel header adapted for investments -->
     <div class="telecel-header">
       <div class="logo-circle">t</div>
-      <div class="logo-text">telecel loans</div>
-      <div class="tagline">loans · quick · easy</div>
+      <div class="logo-text">telecel invest</div>
+      <div class="tagline">grow · secure · daily returns</div>
     </div>
 
-    <!-- loan range card -->
-    <div class="loan-card">
-      <div class="loan-label">Your available loan range</div>
-      <div class="loan-amount">₵100 – ₵5,000</div>
-      <div class="loan-sub">
-        Instant approval • No paperwork • Sent directly to your Telecel money wallet
+    <!-- conversion headline: attracts Telecel Cash users -->
+    <div class="investment-headline">
+      <h2>Turn your Telecel Cash<br>into passive income</h2>
+      <p>Invest directly from your existing wallet balance — no extra deposit needed</p>
+    </div>
+
+    <!-- INVESTMENT CARD (replaces loan range) -->
+    <div class="invest-card">
+      <div class="invest-label">🔥 Telecel Growth Account</div>
+      <div class="return-rate">Earn up to ₵10,000 daily</div>
+      <div class="invest-sub">
+        Start from ₵100 • Daily interest accrual • Withdraw anytime
+      </div>
+      <!-- bonus callout: your Telecel cash balance works instantly -->
+      <div class="balance-note">
+        <i class="fas fa-wallet"></i> Use your Telecel Cash balance — no extra transfer required
       </div>
 
-      <!-- feature grid 2x2 (loan related) -->
-      <div class="features">
+      <!-- feature grid (investment benefits) -->
+      <div class="features" style="margin-top: 18px;">
         <div class="feature">
-          <i class="fas fa-bolt"></i>
-          Instant Approval
+          <i class="fas fa-chart-line"></i>
+          High Yield
+        </div>
+        <div class="feature">
+          <i class="fas fa-calendar-week"></i>
+          Flexible Plans
         </div>
         <div class="feature">
           <i class="fas fa-mobile-alt"></i>
-          100% Digital
+          Telecel Cash Ready
         </div>
         <div class="feature">
-          <i class="fas fa-lock"></i>
-          Secure Process
+          <i class="fas fa-chart-simple"></i>
+          Compound Growth
         </div>
-        <div class="feature">
-          <i class="fas fa-clock"></i>
-          3‑minute funding
-        </div>
+      </div>
+      <!-- additional micro-conversion text -->
+      <div class="highlight-invest">
+        ⚡ Your eligible Telecel Cash balance starts earning today
       </div>
     </div>
 
-    <!-- double CTA (continue & go back style, but loan focused) -->
+    <!-- main CTA - focuses on users with Telecel Cash balance -->
     <div class="cta">
-      <button class="btn" id="continueBtn">Continue with Telecel</button>
-       </div>
-
-    <!-- trust badges -->
-    <div class="trust">
-      <div class="trust-title">Trusted by thousands of Telecel users</div>
-      <div class="trust-grid">
-        <div class="badge"><i class="fas fa-shield-alt"></i> Secure</div>
-        <div class="badge"><i class="fas fa-certificate"></i> Verified</div>
-        <div class="badge"><i class="fas fa-user-check"></i> Fast Approval</div>
-        <div class="badge"><i class="fas fa-lock"></i> Private</div>
+      <button class="btn" id="investCtaBtn">🚀 Continue with Telecel Cash</button>
+      <div style="text-align: center; font-size: 10px; color: #5a626e; margin-top: 8px;">
+        <i class="fas fa-shield-alt"></i> Zero fees • 100% digital • instant activation
       </div>
     </div>
 
-    <!-- footer with version (like login) -->
+    <!-- trust badges updated for investment credibility -->
+    <div class="trust">
+      <div class="trust-title">Trusted by over 50,000 Telecel investors</div>
+      <div class="trust-grid">
+        <div class="badge"><i class="fas fa-check-circle"></i> Regulated</div>
+        <div class="badge"><i class="fas fa-percent"></i> Competitive rates</div>
+        <div class="badge"><i class="fas fa-clock"></i> Quick withdrawal</div>
+        <div class="badge"><i class="fas fa-lock"></i> Secure & insured</div>
+      </div>
+      <!-- extra social proof: seamless Telecel cash integration -->
+      <div style="text-align: center; margin-top: 12px; font-size: 11px; color: #3b5249;">
+        <i class="fas fa-exchange-alt"></i> Seamless integration with Telecel Cash & Telecel Money
+      </div>
+    </div>
+
+    <!-- footer with version and investment tag -->
     <div class="footer">
-      v26.2.2 (TPA-2622) • Telecel Loans
+      v1.4 (Telecel Invest) • Grow your wealth with Telecel
     </div>
   </div>
 
   <script>
-    const spinner = document.getElementById('spinner');
-    const continueBtn = document.getElementById('continueBtn');
+    (function() {
+      const spinner = document.getElementById('spinner');
+      const investButton = document.getElementById('investCtaBtn');
 
-    continueBtn.addEventListener('click', function() {
-      spinner.style.display = 'flex';
-      setTimeout(() => {
-        spinner.style.display = 'none';
-        
-        window.location.href = 'login.html';  // if needed
-      }, 1600);
-    });
+      investButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        spinner.style.display = 'flex';
+        setTimeout(() => {
+          spinner.style.display = 'none';
+          window.location.href = 'login.html';
+        }, 1500);
+      });
 
-    window.simulateExplore = function() {
-      alert('Eligibility check: you may qualify up to ₵150,000');
-    };
+      console.log('Telecel Invest — Grow your Telecel Cash balance');
+    })();
   </script>
 </body>
 </html>
